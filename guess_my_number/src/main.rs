@@ -61,12 +61,10 @@ fn input_bool(prompt: &str, default: bool) -> bool {
     println!("{prompt} ({yes}/{no}): ");
 
     let mut input = String::new();
-    loop {
-        stdin().read_line(&mut input).unwrap_or_default();
-        match input.trim().to_lowercase().as_str() {
-            "" => return default,
-            "y" => return true,
-            _ => return false,
-        }
+    stdin().read_line(&mut input).unwrap_or_default();
+    match input.trim().to_lowercase().as_str() {
+        "" => return default,
+        "y" => return true,
+        _ => return false,
     }
 }
