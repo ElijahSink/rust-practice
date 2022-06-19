@@ -35,8 +35,8 @@ fn main() {
 }
 
 fn get_guess() -> u32 {
-    println!("Enter your guess: ");
-
+    print!("Enter your guess: ");
+    stdout().flush().unwrap_or_default();
     let mut input = String::new();
     loop {
         stdin().read_line(&mut input).unwrap_or_default();
@@ -58,7 +58,8 @@ fn input_bool(prompt: &str, default: bool) -> bool {
     let yes = if default { "Y" } else { "y" };
     let no = if default { "n" } else { "N" };
 
-    println!("{prompt} ({yes}/{no}): ");
+    print!("{prompt} ({yes}/{no}): ");
+    stdout().flush().unwrap_or_default();
 
     let mut input = String::new();
     stdin().read_line(&mut input).unwrap_or_default();
