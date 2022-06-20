@@ -161,7 +161,7 @@ pub fn display_counters(counters: &mut Vec<Counter>, settings: CounterSettings) 
         .iter()
         .map(|s| s.to_string().len())
         .max()
-        .unwrap()
+        .unwrap_or(1)
         .clone();
 
     for counter in counters.iter() {

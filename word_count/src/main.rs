@@ -13,7 +13,7 @@ struct Cli {
     file: Vec<String>,
 
     #[clap(short = 'c', long = "bytes", action=ArgAction::SetTrue, help = "Print the byte counts")]
-    count_bytes: Option<bool>,
+    count_bytes: bool,
 
     #[clap(
         short = 'm',
@@ -21,37 +21,37 @@ struct Cli {
         action=ArgAction::SetTrue,
         help = "Print the character counts"
     )]
-    count_chars: Option<bool>,
+    count_chars: bool,
 
     #[clap(short = 'w', long = "words", action=ArgAction::SetTrue, help = "Print the word counts")]
-    count_words: Option<bool>,
+    count_words: bool,
 
     #[clap(short = 'l', long = "lines", action=ArgAction::SetTrue, help = "Print the newline counts")]
-    count_lines: Option<bool>,
+    count_lines: bool,
 }
 
 fn parse_settings(cli: &Cli) -> CounterSettings {
-    let any_specified = [
+    let none_specified = [
         cli.count_bytes,
         cli.count_chars,
         cli.count_words,
         cli.count_lines,
     ]
     .iter()
-    .any(|opt| opt.is_some());
+    .all(|opt| !opt);
 
     // if any are specified, everything else becomes false
     // if none are specified, everything is the default value
 
-    if any_specified {
-        CounterSettings::new(
-            cli.count_bytes.unwrap_or(false),
-            cli.count_chars.unwrap_or(false),
-            cli.count_words.unwrap_or(false),
-            cli.count_lines.unwrap_or(false),
-        )
-    } else {
+    if none_specified {
         CounterSettings::new(true, false, true, true)
+    } else {
+        CounterSettings::new(
+            cli.count_bytes,
+            cli.count_chars,
+            cli.count_words,
+            cli.count_lines,
+        )
     }
 }
 
@@ -59,7 +59,6 @@ fn main() {
     let cli = Cli::parse();
 
     let settings = parse_settings(&cli);
-
     let mut counters: Vec<Counter> = Vec::new();
 
     for file in cli.file {
