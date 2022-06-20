@@ -2,6 +2,9 @@
 name = "word_count"
 version = "0.1.0"
 edition = "2021"
+description = "Print newline, word, and byte counts for each FILE, and a total line if\nmore than one FILE is specified.  A word is a non-zero-length sequence of\nprintable characters delimited by white space."
+repository = "https://github.com/ElijahSink/rust-practice/tree/master/word_count"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
