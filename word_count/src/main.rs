@@ -12,21 +12,21 @@ struct Cli {
     #[clap(value_parser, multiple = true, help = "Input files")]
     file: Vec<String>,
 
-    #[clap(short = 'c', long = "bytes", action=ArgAction::Set, help = "Print the byte counts")]
+    #[clap(short = 'c', long = "bytes", action=ArgAction::SetTrue, help = "Print the byte counts")]
     count_bytes: Option<bool>,
 
     #[clap(
         short = 'm',
         long = "chars",
-        action=ArgAction::Set,
+        action=ArgAction::SetTrue,
         help = "Print the character counts"
     )]
     count_chars: Option<bool>,
 
-    #[clap(short = 'w', long = "words", action=ArgAction::Set, help = "Print the word counts")]
+    #[clap(short = 'w', long = "words", action=ArgAction::SetTrue, help = "Print the word counts")]
     count_words: Option<bool>,
 
-    #[clap(short = 'l', long = "lines", action=ArgAction::Set, help = "Print the newline counts")]
+    #[clap(short = 'l', long = "lines", action=ArgAction::SetTrue, help = "Print the newline counts")]
     count_lines: Option<bool>,
 }
 
